@@ -18,10 +18,14 @@
                         {'Vendor-Id', 193},
                         {'Product-Name', "Server"},
                         {'Auth-Application-Id', [?DIAMETER_APP_ID_COMMON]},
-		        {'Acct-Application-Id', [?DIAMETER_APP_ID_ACCOUNTING]},
-                        {application, [{alias, ?APP_ALIAS},
+			{application, [{alias, ?APP_ALIAS},
                                        {dictionary, ?DIAMETER_DICT_COMMON},
+                                       {module, ?CALLBACK_MOD}]},
+                        {'Acct-Application-Id', [?DIAMETER_APP_ID_ACCOUNTING]},
+                        {application, [{alias, ?APP_ALIAS},
+                                       {dictionary, ?DIAMETER_DICT_ACCOUNTING},
                                        {module, ?CALLBACK_MOD}]}]).
+
 
 -define(TRANSPORT_OPTS(Addr, Port), [{transport_module, diameter_tcp},
      					{transport_config, [{reuseaddr, true},

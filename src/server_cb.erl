@@ -44,7 +44,10 @@ handle_error(_Reason, _Request, _SvcName, _Peer) ->
 handle_request(#diameter_packet{msg = Req, errors = []}, _SvcName, {_, Caps})
                   when is_record(Req, diameter_base_CER) ->
 	    discard;
-            
+
+handle_request(#diameter_packet{msg = Req, errors = []}, _SvcName, {_, Caps})
+                  when is_record(Req, diameter_base_ACR) ->
+	    discard;
 
 handle_request(#diameter_packet{msg = Req, errors = []}, _SvcName, {_, Caps})
 		  when is_record(Req, diameter_base_RAR) ->

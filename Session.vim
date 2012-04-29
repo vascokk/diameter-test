@@ -26,9 +26,11 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +0 src/server.erl
+badd +8 src/server.erl
+badd +41 src/client.erl
+badd +28 src/peer.erl
 silent! argdel *
-edit src/server.erl
+edit src/peer.erl
 set splitbelow splitright
 wincmd _ | wincmd |
 vsplit
@@ -42,11 +44,11 @@ set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
-exe '1resize ' . ((&lines * 28 + 26) / 52)
-exe 'vert 1resize ' . ((&columns * 36 + 76) / 153)
-exe '2resize ' . ((&lines * 21 + 26) / 52)
-exe 'vert 2resize ' . ((&columns * 36 + 76) / 153)
-exe 'vert 3resize ' . ((&columns * 116 + 76) / 153)
+exe '1resize ' . ((&lines * 32 + 33) / 67)
+exe 'vert 1resize ' . ((&columns * 49 + 90) / 180)
+exe '2resize ' . ((&lines * 32 + 33) / 67)
+exe 'vert 2resize ' . ((&columns * 49 + 90) / 180)
+exe 'vert 3resize ' . ((&columns * 130 + 90) / 180)
 argglobal
 enew
 file __Tag_List__
@@ -375,19 +377,19 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 8 - ((7 * winheight(0) + 25) / 50)
+let s:l = 36 - ((35 * winheight(0) + 32) / 65)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-8
-normal! 0
+36
+normal! 012l
 wincmd w
-3wincmd w
-exe '1resize ' . ((&lines * 28 + 26) / 52)
-exe 'vert 1resize ' . ((&columns * 36 + 76) / 153)
-exe '2resize ' . ((&lines * 21 + 26) / 52)
-exe 'vert 2resize ' . ((&columns * 36 + 76) / 153)
-exe 'vert 3resize ' . ((&columns * 116 + 76) / 153)
+2wincmd w
+exe '1resize ' . ((&lines * 32 + 33) / 67)
+exe 'vert 1resize ' . ((&columns * 49 + 90) / 180)
+exe '2resize ' . ((&lines * 32 + 33) / 67)
+exe 'vert 2resize ' . ((&columns * 49 + 90) / 180)
+exe 'vert 3resize ' . ((&columns * 130 + 90) / 180)
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf
