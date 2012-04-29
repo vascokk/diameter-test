@@ -18,11 +18,11 @@
                         {'Vendor-Id', 193},
                         {'Product-Name', "Server"},
                         {'Auth-Application-Id', [?DIAMETER_APP_ID_COMMON]},
-			{application, [{alias, ?APP_ALIAS},
+                        {'Acct-Application-Id', [?DIAMETER_APP_ID_ACCOUNTING]},
+			{application, [{alias, srv_base_app},
                                        {dictionary, ?DIAMETER_DICT_COMMON},
                                        {module, ?CALLBACK_MOD}]},
-                        {'Acct-Application-Id', [?DIAMETER_APP_ID_ACCOUNTING]},
-                        {application, [{alias, ?APP_ALIAS},
+                        {application, [{alias, srv_acc_app},
                                        {dictionary, ?DIAMETER_DICT_ACCOUNTING},
                                        {module, ?CALLBACK_MOD}]}]).
 

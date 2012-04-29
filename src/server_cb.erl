@@ -42,12 +42,28 @@ handle_error(_Reason, _Request, _SvcName, _Peer) ->
 
 
 handle_request(#diameter_packet{msg = Req, errors = []}, _SvcName, {_, Caps})
-                  when is_record(Req, diameter_base_CER) ->
-	    discard;
-
-handle_request(#diameter_packet{msg = Req, errors = []}, _SvcName, {_, Caps})
                   when is_record(Req, diameter_base_ACR) ->
-	    discard;
+            
+	    #diameter_caps{origin_host = {OH,_},
+		           origin_realm = {OR,_}}
+	        = Caps,
+
+            #diameter_base_ACR{'Session-Id' = Id,
+		               'Accounting-Record-Type' = RecType,
+                               'Accounting-Record-Number' = RecNum,
+	                       'Acct-Application-Id' = AccAppId	}
+	        = Req,
+	  
+            Ans = #diameter_base_ACA{'Result-Code' = ?'DIAMETER_BASE_RESULT-CODE_SUCCESS',
+	       		       'Origin-Host' = OH,
+	                       'Origin-Realm' = OR,
+	                       'Session-Id' = Id,
+                               'Accounting-Record-Type' = RecType,
+                               'Accounting-Record-Number' = RecNum
+	                      %% 'Acct-Application-Id' = AccAppId	
+
+		},
+	    {reply, Ans};
 
 handle_request(#diameter_packet{msg = Req, errors = []}, _SvcName, {_, Caps})
 		  when is_record(Req, diameter_base_RAR) ->
@@ -75,6 +91,7 @@ handle_request(#diameter_packet{msg = Req} = Pkt, _SvcName, {_, Caps})
 	    {reply, Ans};
 
 handle_request(#diameter_packet{}, _SvcName, {_,_}) ->
+	    io:format("server handle_request: No Match ~n"),
 	    discard.
 
 answer(0, Id, OH, OR) ->
