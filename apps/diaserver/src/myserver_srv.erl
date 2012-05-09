@@ -1,9 +1,3 @@
-%%%'   HEADER
-%%% @author Susan Potter <me@susanpotter.net>
-%%% @copyright 2011 Susan Potter
-%%% @doc gen_server callback module implementation:
-%%% 
-%%% @end
 -module(myserver_srv).
 -author('Susan Potter <me@susanpotter.net>').
 
