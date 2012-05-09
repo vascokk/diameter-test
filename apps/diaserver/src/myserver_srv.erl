@@ -1,5 +1,4 @@
 -module(myserver_srv).
--author('Susan Potter <me@susanpotter.net>').
 
 -behaviour(gen_server).
 
