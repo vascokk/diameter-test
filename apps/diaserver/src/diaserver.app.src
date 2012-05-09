@@ -1,0 +1,12 @@
+{application, diaserver,
+ [
+  {description, ""},
+  {vsn, "1"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {mod, { diaserver_app, []}},
+  {env, []}
+ ]}.

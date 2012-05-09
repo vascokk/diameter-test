@@ -54,7 +54,7 @@ handle_request(#diameter_packet{msg = Req, errors = []}, _SvcName, {_, Caps})
 	                       'Acct-Application-Id' = AccAppId	}
 	        = Req,
 	  
-            Ans = #diameter_base_ACA{'Result-Code' = ?'DIAMETER_BASE_RESULT-CODE_SUCCESS',
+            Ans = #diameter_base_ACA{'Result-Code' = ?'DIAMETER_BASE_RESULT-CODE_DIAMETER_SUCCESS',
 	       		       'Origin-Host' = OH,
 	                       'Origin-Realm' = OR,
 	                       'Session-Id' = Id,
@@ -105,6 +105,11 @@ answer(_, Id, OH, OR) ->
 		            {'Origin-Host', OH},
 		            {'Origin-Realm', OR},
 		            {'Session-Id', Id}].
-
-
-
+%% --------------------------------------------------------------------
+%% %% Function: terminate/2
+%% %% Description: Shutdown the server
+%% %% Returns: any (ignored by gen_server)
+%% %% --------------------------------------------------------------------
+ terminate(Reason, _State) ->
+     io:format("~nServer shutdown. Reason: ~s.~n", [Reason]),
+         ok.

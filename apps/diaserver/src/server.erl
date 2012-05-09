@@ -3,8 +3,7 @@
 -include_lib("diameter.hrl").
 -include_lib("diameter_gen_base_rfc3588.hrl").
 
--export([start/0,
-	listen/0]).
+-export([start/0, start_link/0]).
 
 -define(SVC_NAME,     ?MODULE).
 -define(APP_ALIAS,    ?MODULE).
@@ -32,9 +31,14 @@
                         {ip, Addr},
                         {port, Port}]}]).
 
+
+start_link() ->
+	{ok, spawn(?MODULE, start, [])}.
+
 start() ->
 	diameter:start(),
-	diameter:start_service(?SVC_NAME, ?SVC_OPTS(?SVC_NAME)).
+	diameter:start_service(?SVC_NAME, ?SVC_OPTS(?SVC_NAME)),
+        diameter:add_transport(?SVC_NAME, {listen, ?TRANSPORT_OPTS(?DEFAULT_ADDR, ?DEFAULT_PORT)}).
 
-listen() ->
-	diameter:add_transport(?SVC_NAME, {listen, ?TRANSPORT_OPTS(?DEFAULT_ADDR, ?DEFAULT_PORT)}).
+%%listen() ->
+%%	diameter:add_transport(?SVC_NAME, {listen, ?TRANSPORT_OPTS(?DEFAULT_ADDR, ?DEFAULT_PORT)}).
