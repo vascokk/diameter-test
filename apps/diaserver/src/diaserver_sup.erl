@@ -17,18 +17,18 @@
 %% ===================================================================
 
 start_link() ->
-    supervisor:start_link({local, ?MODULE}, ?MODULE, []).
+	supervisor:start_link({local, ?MODULE}, ?MODULE, []).
 
 %% ===================================================================
 %% Supervisor callbacks
 %% ===================================================================
 
 init([]) ->
-    DiaServer = {diaserver,{server,start_link,[]},
-                 permanent,
-                 5000,
-                 worker,
-                 [server_cb]},  
-    io:format("--rtace 1--- ~n"),
-    {ok, { {one_for_one, 5, 10}, [DiaServer]} }.
+	DiaServer = {diaserver,{server,start_link,[]},
+                     permanent,
+                     5000,
+                     worker,
+                     [server_cb]},  
+
+	{ok, { {one_for_one, 5, 10}, [DiaServer]} }.
 
