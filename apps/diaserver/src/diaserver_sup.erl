@@ -1,34 +1,31 @@
-
+%%%'   HEADER
+%%% @author Vasco Kolarov <vas@vas.io> 
+%%% @since 
+%%% @copyright 2012 Vasco Kolarov
+%%% @doc 
+%%% @end
 -module(diaserver_sup).
 
 -behaviour(supervisor).
-
-%% API
 -export([start_link/0]).
-
-%% Supervisor callbacks
 -export([init/1]).
 
-%% Helper macro for declaring children of supervisor
--define(CHILD(I, Type), {I, {I, start_link, []}, permanent, 5000, Type, [I]}).
-
-%% ===================================================================
-%% API functions
-%% ===================================================================
-
+-define(SERVER, ?MODULE).
+%%%.
+%%%'   PUBLIC API
 start_link() ->
-	supervisor:start_link({local, ?MODULE}, ?MODULE, []).
+  supervisor:start_link({local, ?SERVER}, ?MODULE, []).
 
-%% ===================================================================
-%% Supervisor callbacks
-%% ===================================================================
-
+%%%.
+%%%'   CALLBACKS
 init([]) ->
-	DiaServer = {diaserver,{server,start_link,[]},
+        DiaServer = {diaserver,{diameter_srv,start_link,[]},
                      permanent,
                      5000,
                      worker,
-                     [server_cb]},  
+                     [server_cb]},
 
-	{ok, { {one_for_one, 5, 10}, [DiaServer]} }.
+        {ok, { {one_for_one, 5, 10}, [DiaServer]} }.
 
+%%%.
+%%% vim: set filetype=erlang tabstop=2 foldmarker=%%%',%%%. foldmethod=marker:

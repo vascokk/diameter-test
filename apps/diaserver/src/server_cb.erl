@@ -63,53 +63,6 @@ handle_request(#diameter_packet{msg = Req, errors = []}, _SvcName, {_, Caps})
 	                      %% 'Acct-Application-Id' = AccAppId	
 
 		},
-	    {reply, Ans};
+	    {reply, Ans}.
 
-handle_request(#diameter_packet{msg = Req, errors = []}, _SvcName, {_, Caps})
-		  when is_record(Req, diameter_base_RAR) ->
-	    #diameter_caps{origin_host = {OH,_},
-		           origin_realm = {OR,_}}
-	        = Caps,
-	    #diameter_base_RAR{'Session-Id' = Id,
-		               'Re-Auth-Request-Type' = RT}
-	        = Req,
-
-	    {reply, answer(RT, Id, OH, OR)};
-
-handle_request(#diameter_packet{msg = Req} = Pkt, _SvcName, {_, Caps})
-		  when is_record(Req, diameter_base_RAR) ->
-	    #diameter_caps{origin_host = {OH,_},
-		                   origin_realm = {OR,_}}
-	        = Caps,
-	    #diameter_base_RAR{'Session-Id' = Id}
-	        = Req,
-
-	    Ans = #diameter_base_RAA{'Origin-Host' = OH,
-			                             'Origin-Realm' = OR,
-			                             'Session-Id' = Id},
-
-	    {reply, Ans};
-
-handle_request(#diameter_packet{}, _SvcName, {_,_}) ->
-	    io:format("server handle_request: No Match ~n"),
-	    discard.
-
-answer(0, Id, OH, OR) ->
-	    #diameter_base_RAA{'Result-Code' = 2001, %% DIAMETER_SUCCESS
-		                       'Origin-Host' = OH,
-		                       'Origin-Realm' = OR,
-		                       'Session-Id' = Id};
-
-answer(_, Id, OH, OR) ->
-	    ['RAA', {'Result-Code', 5012}, %% DIAMETER_UNABLE_TO_COMPLY
-		            {'Origin-Host', OH},
-		            {'Origin-Realm', OR},
-		            {'Session-Id', Id}].
-%% --------------------------------------------------------------------
-%% %% Function: terminate/2
-%% %% Description: Shutdown the server
-%% %% Returns: any (ignored by gen_server)
-%% %% --------------------------------------------------------------------
- terminate(Reason, _State) ->
-     io:format("~nServer shutdown. Reason: ~s.~n", [Reason]),
-         ok.
+		  

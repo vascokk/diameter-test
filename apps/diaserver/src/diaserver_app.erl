@@ -1,16 +1,23 @@
--module(diaserver_app).
+%%%'   HEADER
+%%% @author Vasco Kolarov <vas@vas.io> 
+%%% @since 
+%%% @copyright 2012 Vasco Kolarov
+%%% @doc 
+%%% @end
 
+-module(diaserver_app).
 -behaviour(application).
 
-%% Application callbacks
 -export([start/2, stop/1]).
-
-%% ===================================================================
-%% Application callbacks
-%% ===================================================================
-
+%%%.
+%%%'   CALLBACKS
 start(_StartType, _StartArgs) ->
-    diaserver_sup:start_link().
+  diaserver_sup:start_link().
 
 stop(_State) ->
-    ok.
+  ok.
+%%%.
+%%%'   PRIVATE FUNCTIONS
+
+%%%.
+%%% vim: set filetype=erlang tabstop=2 foldmarker=%%%',%%%. foldmethod=marker:

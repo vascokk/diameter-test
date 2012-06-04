@@ -36,7 +36,7 @@ start_link() ->
 	{ok, spawn(?MODULE, start, [])}.
 
 start() ->
-	diameter:start(),
+%%	diameter:start(),
 	diameter:start_service(?SVC_NAME, ?SVC_OPTS(?SVC_NAME)),
         diameter:add_transport(?SVC_NAME, {listen, ?TRANSPORT_OPTS(?DEFAULT_ADDR, ?DEFAULT_PORT)}).
 
