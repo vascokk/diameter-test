@@ -1,0 +1,8 @@
+*.beam
+.eunit
+deps/*
+apps/aggregation/ebin
+*~
+dev/*
+doc/*
+rel/aggregation
