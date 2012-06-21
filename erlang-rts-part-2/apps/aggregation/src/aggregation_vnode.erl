@@ -28,6 +28,7 @@ init([Partition]) ->
 
 %% Sample command: respond to a ping
 handle_command(ping, _Sender, State) ->
+    io:format("Ping received by node : ~p~n",[node()]),
     {reply, {pong, State#state.partition}, State};
 
 handle_command(accounting, _Sender, State) ->
