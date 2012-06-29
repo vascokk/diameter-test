@@ -1,0 +1,17 @@
+message DiameterErrResp {
+  required bytes errmsg = 1;
+  required bytes errcode = 3;
+}
+
+message DiameterPingReq{
+}
+
+message DiameterPingResp{
+}
+
+message DiameterMsgReq{
+}
+
+message DiameterMsgResp{
+}
+
