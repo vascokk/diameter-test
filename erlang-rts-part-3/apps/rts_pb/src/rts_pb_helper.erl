@@ -3,17 +3,18 @@
 -export([msg_type/1, msg_code/1]).
 
 -spec msg_type(integer()) -> atom().
-msg_type(0) -> rts_aggr_err_resp;
-msg_type(1) -> rts_aggr_ping_req;
-msg_type(2) -> rts_aggr_ping_resp;
-msg_type(3) -> rts_aggr_msg_req;
-msg_type(4) -> rts_aggr_msg_resp.
+msg_type(1000) -> rtserrresp;
+msg_type(1001) -> rtspingreq;
+msg_type(1002) -> rtspingresp;
+msg_type(1003) -> rtsmsgreq;
+msg_type(1004) -> rtsmsgresp;
+msg_type(_)	   -> undefined.
 
 
 -spec msg_code(atom()) -> integer().
-msg_code(rts_aggr_err_resp)             -> 0;
-msg_code(rts_aggr_ping_req)             -> 1;
-msg_code(rts_aggr_ping_resp)            -> 2;
-msg_code(rts_aggr_msg_req)              -> 3;
-msg_code(rts_aggr_msg_resp)             -> 4.
+msg_code(rtserrresp)  -> 1000;
+msg_code(rtspingreq)  -> 1001;
+msg_code(rtspingresp) -> 1002;
+msg_code(rtsmsgreq)   -> 1003;
+msg_code(rtsmsgresp)  -> 1004.
 

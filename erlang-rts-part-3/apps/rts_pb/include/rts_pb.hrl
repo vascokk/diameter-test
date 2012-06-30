@@ -1,15 +1,18 @@
--record(diametererrresp, {
+-record(rtserrresp, {
     errmsg = erlang:error({required, errmsg}),
-    errcode = erlang:error({required, errcode})
+    errcode = erlang:error({required, errcode}),
+    rts_application
 }).
 
--record(diametermsgreq, {
-    errmsg = erlang:error({required, errmsg}),
-    errcode = erlang:error({required, errcode})
+-record(rtsmsgreq, {
+    msg = erlang:error({required, msg}),
+    diameter_application,
+    rts_application
 }).
 
--record(diametermsgresp, {
-    errmsg = erlang:error({required, errmsg}),
-    errcode = erlang:error({required, errcode})
+-record(rtsmsgresp, {
+    msg = erlang:error({required, msg}),
+    diameter_application,
+    rts_application
 }).
 

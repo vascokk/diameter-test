@@ -16,7 +16,7 @@ start(_StartType, _StartArgs) ->
             ok = riak_core_ring_events:add_guarded_handler(aggregation_ring_event_handler, []),
             ok = riak_core_node_watcher_events:add_guarded_handler(aggregation_node_event_handler, []),
             ok = riak_core_node_watcher:service_up(aggregation, self()),
-	    	ok = riak_api_pb_service:register(aggregation_pb_service, 0, 4),
+			ok = riak_api_pb_service:register(aggregation_pb_service, 1000, 1004),
             {ok, Pid};
         {error, Reason} ->
             {error, Reason}

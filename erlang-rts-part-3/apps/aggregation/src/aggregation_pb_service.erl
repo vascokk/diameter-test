@@ -14,8 +14,11 @@
 init() ->
     undefined.
 
-decode(Code, Bin) ->
-    {ok, rts_pb:decode(Code, Bin)}.
+decode(Code, <<>>) when Code==1001 ->
+	{ok, rts_pb_helper:msg_type(Code)};	
+decode(Code, MsgData) ->
+	{ok, rts_pb:decode(rts_pg_helper:msg_type(Code), MsgData)}.
+
 
 encode(Msg) when is_atom(Msg) ->
 	[rts_pb_helper:msg_code(Msg)];
@@ -23,10 +26,10 @@ encode(Msg) when is_tuple(Msg) ->
 	MsgType = element(1, Msg),
 	[rts_pb_helper:msg_code(MsgType) | rts_pb:encode(Msg)].
 
-process(rts_aggr_ping_req, State) ->
+process(rtspingreq, State) ->
 	aggregation:ping(),
-	{reply, rts_aggr_ping_resp, State};
-process(rts_aggr_msg_req, State) ->
+	{reply, rtspingresp, State};
+process(rtsmsgreq, State) ->
 	aggregation:accounting(),
 	Message = rts_pb_helper:msg_type(4), %%TODO replace with the actual message
 	{replay, Message, State}.

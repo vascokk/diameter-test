@@ -57,6 +57,7 @@ init(State) ->
                                         {ip, {127,0,0,1}}, {port, 3868}]}],
         diameter:start_service(SvcName, SvcOpts),
         diameter:add_transport(SvcName, {listen, TransportOpts}),
+		rts_pb_socket:start('127.0.0.1', 7071),
        {ok, State}.
 
 %% @callback gen_server

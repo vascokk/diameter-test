@@ -1,14 +1,17 @@
-message DiameterErrResp {
+message RtsErrResp {
     required bytes errmsg = 1;
     required bytes errcode = 2;
+    optional bytes rts_application = 3;
 }
 
-message DiameterMsgReq{  
-    required bytes errmsg = 1;
-    required bytes errcode = 2;
+message RtsMsgReq{  
+    required bytes msg = 1;
+    optional bytes diameter_application = 2;
+    optional bytes rts_application = 3;
 }
 
-message DiameterMsgResp{
-    required bytes errmsg = 1;
-    required bytes errcode = 2;
+message RtsMsgResp{
+    required bytes msg = 1;
+    optional bytes diameter_application = 2;
+    optional bytes rts_application = 3;
 }
