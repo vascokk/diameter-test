@@ -3,6 +3,9 @@
 
 -include("rts_pb.hrl").
 
+
+-export([start_link/2, start/2, stop/1, send/4]).
+
 -export([init/1, handle_call/3, handle_cast/2, handle_info/2,
 	         terminate/2, code_change/3]).
 
@@ -63,7 +66,7 @@ init([Address, Port]) ->
 	State = #state{address = Address, port = Port},
 	case connect(State) of
 	        {ok, NewState} ->
-		                      ok;
+		                      {ok, NewState};
 	        {error, Reason} ->
 							disconnect(State)	
 	end.
