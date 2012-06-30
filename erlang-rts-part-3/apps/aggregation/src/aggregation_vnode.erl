@@ -32,6 +32,7 @@ handle_command(ping, _Sender, State) ->
     {reply, {pong, State#state.partition}, State};
 
 handle_command(accounting, _Sender, State) ->
+	%%TODO
     {reply, {accounting_resp, State#state.partition}, State};
 
 

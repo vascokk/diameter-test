@@ -20,7 +20,8 @@ test:
 	$(REBAR) skip_deps=true eunit
 
 rel: all
-	$(REBAR) generate
+	(cd rel/aggregation & $(REBAR) generate)
+##	$(REBAR) generate
 
 relclean:
 	rm -rf rel/aggregation
@@ -53,7 +54,7 @@ devclean:
 
 dev1 dev2 dev3: 
 	mkdir -p rel/aggregation/dev
-	(cd rel/aggregation && $(REBAR) generate target_dir=./dev/$@ overlay_vars=vars/$@.config appid=aggregation)
+	(cd rel/aggregation && $(REBAR) generate target_dir=./dev/$@ overlay_vars=vars/$@.config)
 	##mkdir -p dev	
 	##(cd rel && $(REBAR) generate target_dir=../dev/$@ overlay_vars=vars/$@.config)
 

@@ -63,6 +63,9 @@ handle_request(#diameter_packet{msg = Req, errors = []}, _SvcName, {_, Caps})
 	                       'Acct-Application-Id' = AccAppId	
 
 		},
+		
+	   %% Ans = rts_pb:encode(message),	
+
 	    {reply, Ans}.
 
-		  
+

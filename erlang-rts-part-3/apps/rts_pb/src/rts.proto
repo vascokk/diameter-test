@@ -1,0 +1,14 @@
+message DiameterErrResp {
+    required bytes errmsg = 1;
+    required bytes errcode = 2;
+}
+
+message DiameterMsgReq{  
+    required bytes errmsg = 1;
+    required bytes errcode = 2;
+}
+
+message DiameterMsgResp{
+    required bytes errmsg = 1;
+    required bytes errcode = 2;
+}

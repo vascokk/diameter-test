@@ -1,5 +1,4 @@
 -module(aggregation).
--include("aggregation.hrl").
 -include_lib("riak_core/include/riak_core_vnode.hrl").
 
 -export([
