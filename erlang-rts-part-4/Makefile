@@ -50,11 +50,11 @@ devrel: dev1 dev2 dev3
 
 
 devclean:
-	rm -rf rel/aggregation/dev
+	rm -rf rel/rts/dev
 
 dev1 dev2 dev3: 
-	mkdir -p rel/aggregation/dev
-	(cd rel/aggregation && $(REBAR) generate target_dir=./dev/$@ overlay_vars=vars/$@.config)
+	mkdir -p rel/rts/dev
+	(cd rel/rts && $(REBAR) generate target_dir=./dev/$@ overlay_vars=vars/$@.config)
 	##mkdir -p dev	
 	##(cd rel && $(REBAR) generate target_dir=../dev/$@ overlay_vars=vars/$@.config)
 
