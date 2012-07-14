@@ -1,0 +1,11 @@
+{application,aggregation,
+             [{description,[]},
+              {vsn,"1"},
+              {registered,[]},
+              {applications,[kernel,stdlib,riak_core]},
+              {mod,{aggregation_app,[]}},
+              {env,[]},
+              {modules,[aggregation,aggregation_app,aggregation_console,
+                        aggregation_node_event_handler,
+                        aggregation_ring_event_handler,aggregation_sup,
+                        aggregation_vnode]}]}.
