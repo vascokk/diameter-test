@@ -86,12 +86,12 @@ run()
 case "$1" in
     join)
         shift
-        run aggregation_console join $@
+        run myapp_console join $@
         ;;
 
     leave)
         shift
-        run aggregation_console leave $@
+        run myapp_console leave $@
         ;;
 
     remove)
@@ -101,7 +101,7 @@ case "$1" in
         fi
 
         shift
-        run aggregation_console remove $@
+        run myapp_console remove $@
         ;;
 
     member_status)
@@ -160,7 +160,7 @@ case "$1" in
 
     ringready)
         shift
-        run aggregation_console ringready $@
+        run myapp_console ringready $@
         ;;
 
     *)

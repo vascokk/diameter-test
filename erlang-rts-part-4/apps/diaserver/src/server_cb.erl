@@ -54,16 +54,15 @@ handle_request(#diameter_packet{msg = Req, errors = []}, _SvcName, {_, Caps})
 	                       'Acct-Application-Id' = AccAppId	}
 	        = Req,
 	 
-		aggregation:ping(),
+		ResultCode = aggregation:accounting(Req),
  
-        Ans = #diameter_base_ACA{'Result-Code' = ?'DIAMETER_BASE_RESULT-CODE_DIAMETER_SUCCESS',
+        Ans = #diameter_base_ACA{'Result-Code' = ResultCode, %%?'DIAMETER_BASE_RESULT-CODE_DIAMETER_SUCCESS',
 	       		       'Origin-Host' = OH,
 	                       'Origin-Realm' = OR,
 	                       'Session-Id' = Id,
                                'Accounting-Record-Type' = RecType,
                                'Accounting-Record-Number' = RecNum,
 	                       'Acct-Application-Id' = AccAppId	
-
 		},
 
 	    {reply, Ans}.

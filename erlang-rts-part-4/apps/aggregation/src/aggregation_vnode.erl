@@ -2,6 +2,10 @@
 -behaviour(riak_core_vnode).
 -include("aggregation.hrl").
 
+-include_lib("diameter.hrl").
+-include_lib("diameter_gen_base_rfc3588.hrl").
+
+
 -export([start_vnode/1,
          init/1,
          terminate/2,
@@ -31,9 +35,12 @@ handle_command(ping, _Sender, State) ->
     io:format("Ping received by node : ~p~n",[node()]),
     {reply, {pong, State#state.partition}, State};
 
-handle_command(accounting, _Sender, State) ->
-	%%TODO
-    {reply, {accounting_resp, State#state.partition}, State};
+handle_command({accounting, Req}, _Sender, State) ->
+	%%TODO Process accounting request
+	Req,
+	ResponseCode = ?'DIAMETER_BASE_RESULT-CODE_DIAMETER_SUCCESS',
+
+    {reply, ResponseCode, State};
 
 
 

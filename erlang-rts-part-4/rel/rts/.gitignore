@@ -1,5 +1,8 @@
 *.beam
 .eunit
+deps/*
+apps/myapp/ebin
 *~
-rts
-dev
+dev/*
+doc/*
+rel/rts
