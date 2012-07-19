@@ -4,3 +4,4 @@ deps/*
 *~
 dev/*
 doc/*
+*.swp

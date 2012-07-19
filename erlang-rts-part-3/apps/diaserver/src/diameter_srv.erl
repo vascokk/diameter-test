@@ -19,6 +19,9 @@
 
 % TODO: If unnamed server, remove definition below.
 -define(SERVER, ?MODULE).
+-define(DIAMETER_IP, element(2,inet_parse:address(app_helper:get_env(diaserver, diameter_ip, "127.0.0.1")))).
+-define(DIAMETER_PORT, app_helper:get_env(diaserver, diameter_port, 3868)).
+
 %%%.
 %%%'   PUBLIC API
 
@@ -43,6 +46,8 @@ stop() ->
 %%%'   CALLBACKS
 %% @callback gen_server
 init(State) ->
+				lager:info("Starting diameter on IP: ~p", [?DIAMETER_IP]),
+        lager:info("Starting diameter on port: ~p", [?DIAMETER_PORT]),
         SvcName = ?MODULE,
         SvcOpts = [{'Origin-Host', atom_to_list(SvcName) ++ ".example.com"},
                         {'Origin-Realm', "example.com"},
@@ -54,10 +59,9 @@ init(State) ->
                                        {module, server_cb}]}],
         TransportOpts =  [{transport_module, diameter_tcp},
                                         {transport_config, [{reuseaddr, true},
-                                        {ip, {127,0,0,1}}, {port, 3868}]}],
+                                        {ip, ?DIAMETER_IP}, {port, ?DIAMETER_PORT}]}],
         diameter:start_service(SvcName, SvcOpts),
         diameter:add_transport(SvcName, {listen, TransportOpts}),
-		%%rts_pb_socket:start_link('127.0.0.1', 7071),
        {ok, State}.
 
 %% @callback gen_server

@@ -1,7 +1,0 @@
-*.beam
-.eunit
-deps/*
-*~
-dev/*
-doc/*
-*.swp

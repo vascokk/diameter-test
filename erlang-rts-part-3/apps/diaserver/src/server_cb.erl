@@ -53,18 +53,17 @@ handle_request(#diameter_packet{msg = Req, errors = []}, _SvcName, {_, Caps})
                                'Accounting-Record-Number' = RecNum,
 	                       'Acct-Application-Id' = AccAppId	}
 	        = Req,
-	  
-        Ans = #diameter_base_ACA{'Result-Code' = ?'DIAMETER_BASE_RESULT-CODE_DIAMETER_SUCCESS',
+	 
+		ResultCode = aggregation:accounting(Req),
+ 
+        Ans = #diameter_base_ACA{'Result-Code' = ResultCode, %%?'DIAMETER_BASE_RESULT-CODE_DIAMETER_SUCCESS',
 	       		       'Origin-Host' = OH,
 	                       'Origin-Realm' = OR,
 	                       'Session-Id' = Id,
                                'Accounting-Record-Type' = RecType,
                                'Accounting-Record-Number' = RecNum,
 	                       'Acct-Application-Id' = AccAppId	
-
 		},
-		%%rts_pb_socket:send(Req, [], []),				  	
-	    %%Ans = rts_pb:encode(message),	
 
 	    {reply, Ans}.
 
