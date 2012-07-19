@@ -37,6 +37,7 @@ handle_command(ping, _Sender, State) ->
 
 handle_command({accounting, Req}, _Sender, State) ->
 	%%TODO Process accounting request
+    io:format("Accounting Request received by node : ~p~n",[node()]),
 	Req,
 	ResponseCode = ?'DIAMETER_BASE_RESULT-CODE_DIAMETER_SUCCESS',
 
